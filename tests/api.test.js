@@ -44,10 +44,10 @@ describe('API tests', () => {
           });
     });
 
-    describe('GET /customer/{customername}', () => {
+    describe('GET /customer/getCustomerPurchaseHistory/{customername}', () => {
     it('should return success', (done) => {
         request(app)
-            .get('/customer/testname')
+            .get('/customer/getCustomerPurchaseHistory/testname')
             //.send('testname')
             .set('Content-Type', 'application/json')
             .expect(200)
@@ -59,7 +59,7 @@ describe('API tests', () => {
 
     it('should return error', (done) => {
         request(app)
-            .get('/customer')
+            .get('/customer/getCustomerPurchaseHistory')
             .set('Content-Type', 'application/json')
             .expect(404)
             .expect((res) => {

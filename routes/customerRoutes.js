@@ -9,7 +9,7 @@ const  {
 
 
 
-router.get("/:customername", getCustomerPurchaseHistory);
+router.get("/getCustomerPurchaseHistory/:customername", getCustomerPurchaseHistory);
 router.post('/order/:customerId', orderFood);
 
 

@@ -30,7 +30,6 @@ const orderFood = async (req, res, next) => {
         }
 
         let body = req.body;
-        
         if (typeof body.resturant_name == 'undefined' || body.resturant_name.length === 0) {
             error.push('Bad request param. resturant_name is missing');
         }
@@ -66,7 +65,7 @@ const orderFood = async (req, res, next) => {
             res.status(400).json({'error_message': error});
         }
 
-
+        console.log(resturantDishes);
         let [newRecord] = await ResturantDish.saveOrder(customerId, resturantName, resturantDishes, resturatnId);
         res.status(200).json({newRecord});
     } catch (error) {

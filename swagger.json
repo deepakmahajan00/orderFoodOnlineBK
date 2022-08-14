@@ -13,12 +13,15 @@
       },
       {
         "name": "resturants",
-        "description": "Storing and Retrieving of rides data"
+        "description": "Get all resturant apis"
       },
-      
       {
         "name": "business",
-        "description": "Check the health of service"
+        "description": "Get all business related apis"
+      },
+      {
+        "name": "customer",
+        "description": "Get all customer relates apis"
       }
     ],
     "schemes": [
@@ -175,6 +178,89 @@
             }
           }
         }
+      },
+
+      "/customer/getCustomerPurchaseHistory/{customername}": {
+        "get": {
+          "tags": [
+            "customer"
+          ],
+          "summary": "Find customer by name",
+          "description": "Returns a customer based on name",
+          "operationId": "getCustomerPurchaseHistory",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "customername",
+              "in": "path",
+              "description": "customer name",
+              "required": true,
+              "type": "string",
+              "example": "Edith Johnson"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/GetResturantsResponse"
+              }
+            },
+            "404": {
+              "description": "Could not find any customer"
+            },
+            "500": {
+              "description": "Server error"
+            }
+          }
+        }
+      },
+
+      "/customer/order/{customerId}": {
+        "post": {
+          "tags": [
+            "customer"
+          ],
+          "summary": "Place order",
+          "description": "Order dishes from one resturant",
+          "operationId": "orderFood",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "customerId",
+              "in": "path",
+              "description": "customer id",
+              "required": true,
+              "example": 1
+            },
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/OrderRequest"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/GetResturantsResponse"
+              }
+            },
+            "404": {
+              "description": "Could not find any customer"
+            },
+            "500": {
+              "description": "Server error"
+            }
+          }
+        }
       }
     },
     "definitions": {
@@ -239,6 +325,25 @@
                           }
                     }
                 }
+            }
+            
+        }
+      },
+      "OrderRequest": {
+        "type": "object",
+        "properties": {
+            "resturant_name": {
+                "type": "string",
+                "required": true,
+                "example": "Ulu Ocean Grill and Sushi Lounge"
+            },
+            "dishes": {
+              "type": "array",
+              "required": true,
+              "example": [
+                "Postum cereal coffee",
+                "DRY LIGHT IMPORTED WINE"
+              ]
             }
             
         }
