@@ -1,0 +1,251 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "This is the developer documentation for online food project",
+      "version": "1.0.0",
+      "title": "Documentation for Online Food Project"
+    },
+    "host": "localhost:8010",
+    "tags": [
+      {
+        "name": "health",
+        "description": "Check the health of service"
+      },
+      {
+        "name": "resturants",
+        "description": "Storing and Retrieving of rides data"
+      },
+      
+      {
+        "name": "business",
+        "description": "Check the health of service"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/health": {
+        "get": {
+          "tags": [
+            "health"
+          ],
+          "summary": "Simple call to check heath of service",
+          "responses": {
+            "200": {
+              "description": "Successful call"
+            }
+          }
+        }
+      },
+      "/business/getResturantByOpenTiming": {
+        "get": {
+          "tags": [
+            "business"
+          ],
+          "summary": "Fetch all resturants during given business timings",
+          "description": "Returns a resturant those are open during given day and time",
+          "operationId": "getResturantByOpenTiming",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "businessTiming",
+              "in": "query",
+              "description": "Business operating day and time",
+              "required": true,
+              "type": "string",
+              "example": "Mon, 12:15 PM-15:00 PM"
+            }
+          ],
+
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "$ref": "#/definitions/GetResturantsResponse"
+              }
+            },
+            "404": {
+              "description": "Could not find any resturants in given business time"
+            },
+            "500": {
+              "description": "Server error"
+            }
+          }
+        }
+      },
+      "/resturants/{resturantOrDishName}": {
+        "get": {
+          "tags": [
+            "resturants"
+          ],
+          "summary": "Find resturants by name or dish name",
+          "description": "Returns a resturant based on resturant or dish name",
+          "operationId": "getResturantByNameOrDishName",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "resturantOrDishName",
+              "in": "path",
+              "description": "name of resturant or dish",
+              "required": true,
+              "type": "string",
+              "example": "Paneer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/GetResturantsResponse"
+              }
+            },
+            "404": {
+              "description": "Could not find any resturants"
+            },
+            "500": {
+              "description": "Server error"
+            }
+          }
+        }
+      },
+      
+      
+      "/resturants/getResturantsMoreOrLessNumberOfDishes": {
+        "get": {
+          "tags": [
+            "resturants"
+          ],
+          "summary": "Find resturant those have more or less than given number of dishes",
+          "description": "Returns a resturant has less or more than x number of dishes",
+          "operationId": "getResturantsMoreOrLessNumberOfDishes",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "morethan",
+              "in": "query",
+              "description": "More than number of dishes",
+              "required": false,
+              "type": "integer",
+              "example": "13"
+            },
+            {
+                "name": "lessthan",
+                "in": "query",
+                "description": "Less than number of dishes",
+                "required": false,
+                "type": "integer",
+                "example": "4"
+            },
+            {
+                "name": "minprice",
+                "in": "query",
+                "description": "Minimum price of dishes",
+                "required": true,
+                "type": "integer",
+                "example": "50"
+            },
+            {
+                "name": "maxprice",
+                "in": "query",
+                "description": "Maximum price of dishes",
+                "required": true,
+                "type": "integer",
+                "example": "70"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/GetResturantsResponse"
+              }
+            },
+            "404": {
+              "description": "Could not find any resturants who has more or less than given number of dishes"
+            },
+            "500": {
+              "description": "Server error"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "RidesRequest": {
+        "type": "object",
+        "properties": {
+          "start_long": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The initial longitude of the ride"
+          },
+          "start_lat": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The initial latitude of the ride"
+          },
+          "end_long": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The final longitude of the ride"
+          },
+          "end_lat": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The final latitude of the ride"
+          },
+          "rider_name": {
+            "type": "string",
+            "description": "The name of the rider"
+          },
+          "driver_name": {
+            "type": "string",
+            "description": "The name of the rider"
+          },
+          "driver_vehicle": {
+            "type": "string",
+            "description": "The name of the rider"
+          }
+        }
+      },
+      "ResturantResponse": {
+        "type": "object",
+        "properties": {
+            "resturants": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "name of the resturant"
+                          },
+                          "cashBalance": {
+                            "type": "number",
+                            "format": "double",
+                            "description": "Resturant cash balance"
+                          },
+                          "openingHours": {
+                            "type": "opening_hours",
+                            "format": "string",
+                            "description": "Resturant operating hours"
+                          }
+                    }
+                }
+            }
+            
+        }
+      },
+      "GetResturantsResponse": {
+        "type": "array",
+        "$ref": "#/definitions/ResturantResponse"
+      }
+    }
+  }
