@@ -51,10 +51,21 @@ class Resturant {
         {
             priceCondition = `WHERE rm.price >= ${minPrice} AND rm.price <= ${maxPrice}`
         } 
+        
+        // var sql = `SELECT r.resturant_id, r.name, rm.menu_id, rm.price, count(*) as num_of_dishes
+        // SELECT r.resturant_id, r.name
+        // FROM resturants r
+        // JOIN resturant_menus rm ON rm.resturant_id = r.resturant_id
+        // ${priceCondition}
+        // GROUP BY r.resturant_id
+        // ${countCondition}
+        // ORDER BY r.name ASC`;
+        // return db.execute(sql);
+
         var sql = `
         SELECT r.resturant_id, r.name, rm.menu_id, rm.price, count(*) as num_of_dishes
-        FROM resturants r
-        JOIN resturant_menus rm ON rm.resturant_id = r.resturant_id
+        FROM resturants AS r
+        JOIN resturant_menus AS rm ON rm.resturant_id = r.resturant_id
         ${priceCondition}
         GROUP BY r.resturant_id
         ${countCondition}
