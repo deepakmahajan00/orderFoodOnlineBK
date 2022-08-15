@@ -23,6 +23,7 @@ services:
     #     php loadCustomersData.php &&
     #     php loadCustomerPurchaseHistory.php &&
     #     php loadBusinessHours.php"
+    
     depends_on:
       - mydb
     env_file: ./.env
