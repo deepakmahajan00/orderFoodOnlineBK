@@ -1,3 +1,0 @@
-build:
-  docker:
-    www: infrastructure/php/Dockerfile-php
