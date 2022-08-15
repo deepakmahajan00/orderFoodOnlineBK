@@ -6,7 +6,7 @@ WORKDIR /var/www/html/
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
-ADD infrastructure/php/php.ini /usr/local/etc/php/php.ini
+ADD ./infrastructure/php/php.ini /usr/local/etc/php/php.ini
 
 RUN apt-get update && docker-php-ext-install mysqli
 # If you are building your code for production
