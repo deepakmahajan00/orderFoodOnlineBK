@@ -45,7 +45,7 @@ services:
     ports:
       - 18010:8010
     environment:
-      - DB_HOST=mysqldb
+      - DB_HOST=mydb
       - DB_USER=root
       - DB_PASSWORD=pole
       - DB_NAME=order_food
