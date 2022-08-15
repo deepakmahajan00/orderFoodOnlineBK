@@ -2,3 +2,4 @@ build:
   docker:
     www: ./infrastructure/php/Dockerfile-php
     app: ./infrastructure/node/Dockerfile-nodeapp
+    mydb: ./infrastructure/mysql/Dockerfile-mysql
