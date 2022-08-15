@@ -1,0 +1,60 @@
+version: '2'
+services:
+  mydb:
+    image: deepakmahajan00/mysql57debian:latest
+    restart: unless-stopped
+    ports:
+      - 23306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "pole"
+      MYSQL_DATABASE: 'order_food'
+    networks:
+      - node-developer
+  www:
+    image: deepakmahajan00/php74:latest
+    restart: unless-stopped
+    # command: >      
+    #   bash -c "php createTables.php &&
+    #     php loadResturantsAndMenuData.php &&
+    #     php loadResturantsData.php &&
+    #     php loadMenusData.php &&
+    #     php loadCustomerAndPurchaseHistoryData.php &&
+    #     php loadCustomersData.php &&
+    #     php loadCustomerPurchaseHistory.php &&
+    #     php loadBusinessHours.php"
+    depends_on:
+      - mydb
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=pole
+      - MYSQL_DATABASE='order_food'
+    ports:
+      - 18080:80
+    volumes:
+      - .:/var/www/html/
+    links:
+      - mydb
+    networks:
+      - node-developer
+  app:
+    image: deepakmahajan00/node-app:latest
+    depends_on:
+      - mydb
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - 18010:8010
+    environment:
+      - DB_HOST=mysqldb
+      - DB_USER=root
+      - DB_PASSWORD=pole
+      - DB_NAME=order_food
+      - DB_PORT=3306
+    stdin_open: true
+    links:
+      - mydb
+    networks:
+      - node-developer
+
+networks:
+  node-developer:
