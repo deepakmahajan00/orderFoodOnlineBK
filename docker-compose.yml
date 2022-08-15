@@ -14,7 +14,8 @@ services:
     image: deepakmahajan00/php74:latest
     restart: unless-stopped
     # command: >      
-    #   bash -c "php createTables.php &&
+    #   bash -c "cd infrastructure/sql-data &&
+    #     php createTables.php &&
     #     php loadResturantsAndMenuData.php &&
     #     php loadResturantsData.php &&
     #     php loadMenusData.php &&
