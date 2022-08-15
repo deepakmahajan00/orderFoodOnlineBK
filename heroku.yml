@@ -1,3 +1,4 @@
 build:
+  context: .
   docker:
     www: ./infrastructure/php/Dockerfile-php
