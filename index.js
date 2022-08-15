@@ -8,7 +8,7 @@ const HOST = process.env.HOST || 'localhost';
 const bodyParser = require('body-parser');
 bodyParser.json();
 
-const app = require('./app');
+const app = require('./src/app');
 
 app.listen(PORT, () => console.log(
     `App started and listening on port ${PORT} 

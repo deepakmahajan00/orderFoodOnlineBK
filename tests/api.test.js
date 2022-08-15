@@ -1,10 +1,10 @@
 'use strict';
-const db = require('../config/db');
+const db = require('../src/config/db');
 
 const request = require('supertest');
 const assert = require('chai').assert;
 
-const app =  require('../app');
+const app =  require('../src/app');
 
 describe('API tests', () => {
     

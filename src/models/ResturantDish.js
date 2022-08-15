@@ -17,8 +17,6 @@ class ResturantDish {
             dishes.forEach(dish => {
                 totalPrice += dish.price;
                 db.query(`INSERT INTO orders SET cust_id = ${customerId}, dish_name = '${dish.dish_name}', resturant_name = '${resturantName}', transaction_amount = ${dish.price}, transaction_date = 'NOW()'`);    
-                //console.log(sql);
-                //db.query(sql);
             });
             
             this.handleCustomerCashBalancePostSaveOrder(customerId, totalPrice);

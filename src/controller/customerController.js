@@ -65,7 +65,6 @@ const orderFood = async (req, res, next) => {
             res.status(400).json({'error_message': error});
         }
 
-        console.log(resturantDishes);
         let [newRecord] = await ResturantDish.saveOrder(customerId, resturantName, resturantDishes, resturatnId);
         res.status(200).json({newRecord});
     } catch (error) {

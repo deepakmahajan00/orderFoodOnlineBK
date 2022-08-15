@@ -4,9 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon index.js ts-node ./src/index.ts",
+    "start": "nodemon index.js ts-node index.ts",
     "test": "nyc --reporter=html --reporter=text mocha tests",
-    "lint": "eslint ./src --fix",
+    "lint": "eslint . --fix",
     "tsc": "tsc"
   },
   "nyc": {
@@ -16,8 +16,8 @@
     "functions": 80,
     "statements": 80
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["Order Food Online"],
+  "author": "Deepak Mahajan",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
