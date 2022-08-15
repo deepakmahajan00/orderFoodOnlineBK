@@ -1,3 +1,3 @@
 build:
   docker:
-    app: infrastructure/node/Dockerfile-nodeapp
+    www: infrastructure/php/Dockerfile-php
